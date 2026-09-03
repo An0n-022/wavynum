@@ -96,7 +96,10 @@ cleanup() {
     printf '%s%s%s' "$RESET" $'\e[?25h' $'\e[?1049l'
 }
 
-trap cleanup EXIT INT TERM HUP
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+trap 'exit 129' HUP
 
 # Use the alternate screen and hide the cursor, leaving the shell clean on exit.
 printf '%s%s' $'\e[?1049h' $'\e[?25l'
